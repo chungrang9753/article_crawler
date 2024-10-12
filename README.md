@@ -14,8 +14,8 @@
 
 # 설치 방법
 기본 라이브러리 설치
-pip install Flask cx_Oracle openai python-dotenv FinanceDataReader pandas requests
-pip install werkzeug beautifulsoup4 matplotlib fpdf playsound reportlab
+```pip install Flask cx_Oracle openai python-dotenv FinanceDataReader pandas requests```
+```pip install werkzeug beautifulsoup4 matplotlib fpdf playsound reportlab```
 
 'gpt.env' 파일의 OPENAI_API_KEY에 gpt api key를 입력하셔야 챗 봇 기능과 뉴스 기사 요약 및 감정 분석 기능을 사용하실 수 있습니다.
 
