@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}35SIBO{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Header -->
+        <header id="header">
+            <div class="inner">
+                <!-- 로고 텍스트 -->
+                <a href="{{ url_for('home') }}" class="logo lemon-regular">
+                    35SIBO
+                </a>
+
+                <!-- 네비게이션 메뉴 -->
+                <nav class="menu">
+                    <ul>
+                        <li><a href="{{ url_for('home') }}" class="menu-link">HOME</a></li>
+                        <li><a href="{{ url_for('search') }}" class="menu-link">NEWS</a></li>
+                        <li><a href="{{ url_for('stock_info') }}" class="menu-link">STOCK</a></li>
+                        <li><a href="{{ url_for('sibo') }}" class="menu-link">SIBO</a></li>
+                    </ul>
+                </nav>
+
+                <!-- 로그인 및 회원가입 버튼 -->
+                <div class="auth-buttons">
+                    {% if not session.get('user_id') %}
+                        <a href="{{ url_for('login') }}" class="btn-login">로그인</a>
+                        <a href="{{ url_for('register') }}" class="btn-register">회원가입</a>
+                    {% else %}
+                        <span>안녕하세요, {{ session['username'] }}님!</span>
+                        <a href="{{ url_for('logout') }}" class="btn-logout">로그아웃</a>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main">
+            <section class="main-content">
+                {% block content %}{% endblock %}
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="inner">
+                <p>© 2024 35SIBO. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Chatbot Integration -->
+        <div id="chatbot-container">
+            <button id="chatbot-toggle" class="fab">
+                <img src="{{ url_for('static', filename='chat-icon.png') }}" alt="Chat" />
+            </button>
+            <div id="chatbot-popup" class="chat-popup hidden">
+                <h3 align="center">궁금한 것이 있나요?</h3>
+                <div id="chat-content"></div>
+                <input type="text" id="chat-input" placeholder="질문을 입력하세요...">
+                <button id="send-button">전송</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            let answer = '';
+
+            // 챗봇 토글 기능
+            $('#chatbot-toggle').click(function() {
+                $('#chatbot-popup').toggleClass('hidden');
+            });
+
+            // 질문 전송 기능
+            $('#send-button').click(function() {
+                const userMessage = $('#chat-input').val().trim();
+                if (userMessage === '') return;
+
+                $('#chat-content').append('<div class="user-message">' + userMessage + '</div>');
+                $('#chat-input').val('');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ url_for("chat") }}',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ message: userMessage }),
+                    success: function(response) {
+                        answer = response.answer || "응답을 받을 수 없습니다.";
+                        $('#chat-content').append('<div class="bot-message">' + answer + '</div>');
+
+                        // TTS
+                        $.ajax({
+                            type: 'POST',
+                            url: '{{ url_for("tts") }}',
+                            contentType: 'application/json',
+                            data: JSON.stringify({ answer: answer }),
+                            success: function(response) {},
+                            error: function() {
+                                $('#chat-content').append('<div class="bot-message">오류가 발생했습니다. 다시 시도해 주세요.</div>');
+                            }
+                        });
+                    },
+                    error: function() {
+                        $('#chat-content').append('<div class="bot-message">오류가 발생했습니다. 다시 시도해 주세요.</div>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

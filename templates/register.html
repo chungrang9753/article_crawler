@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}회원가입 - 35SIBO{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <h2 class="auth-title">회원가입</h2>
+    <div class="auth-container">
+        <form method="POST" class="auth-form">
+            <label for="userid" class="auth-label">아이디</label>
+            <input type="text" id="userid" name="userid" placeholder="아이디" required class="auth-input">
+            
+            <label for="username" class="auth-label">이름</label>
+            <input type="text" id="username" name="username" placeholder="이름" required class="auth-input">
+            
+            <label for="password" class="auth-label">비밀번호</label>
+            <input type="password" id="password" name="password" placeholder="비밀번호" required class="auth-input">
+            
+            <label for="email" class="auth-label">이메일</label>
+            <input type="email" id="email" name="email" placeholder="이메일" required class="auth-input">
+
+            <button type="submit" class="auth-button primary">회원가입하기</button>
+        </form>
+
+        <hr class="auth-divider">
+        <a href="{{ url_for('login') }}" class="auth-button secondary">로그인하기</a>
+    </div>
+</section>
+{% endblock %}

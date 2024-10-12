@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Home - 35SIBO{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Welcome to the Homepage</h1>
+        <p>This page is the result of a project by the 35SIBO team.</br>
+            Let’s take a look at society by searching articles and stock prices with 35SIBO.</br>
+            We want to help your business grow.</p>
+    </div>
+</section>
+
+<section class="articles">
+    <div class="container">
+        <h2>Latest Articles</h2>
+        <div class="article-list">
+            <!-- Articles Loop -->
+            {% for article in articles %}
+            <article class="loop">
+                <div class="image">
+                    <img src="{{ article.image_url }}" alt="Article Image">
+                </div>
+                <div class="desc">
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.summary }}</p>
+                    <a href="{{ article.link }}">Read More</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

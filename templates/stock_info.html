@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}STOCK - 35SIBO{% endblock %}
+
+{% block content %}
+<section class="main-content">
+    <h1>주가 정보</h1>
+
+    <!-- 코스피 지수 영역 -->
+    <div class="kospi-section">
+        <h2>오늘의 코스피 지수</h2>
+        <form method="POST" action="/kospi_period" class="period-buttons">
+            <button type="submit" name="period" value="1d" class="{% if kospi_period == '1d' %}selected{% endif %}">1일</button>
+            <button type="submit" name="period" value="3m" class="{% if kospi_period == '3m' %}selected{% endif %}">3개월</button>
+            <button type="submit" name="period" value="1y" class="{% if kospi_period == '1y' %}selected{% endif %}">1년</button>
+            <button type="submit" name="period" value="3y" class="{% if kospi_period == '3y' %}selected{% endif %}">3년</button>
+        </form>
+
+        {% if kospi_image %}
+            <img src="{{ kospi_image }}" alt="Kospi Chart" class="kospi-image">
+        {% endif %}
+
+        {% if kospi_info %}
+        <div class="kospi-info">
+            <p>현재 가격: {{ kospi_info.current_price }}</p>
+            <p>거래량: {{ kospi_info.volume | intcomma }}</p>
+            <p>52주 최고: {{ kospi_info.year_high }} | 최저: {{ kospi_info.year_low }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- 기업 주가 정보 영역 -->
+    <h2>기업 주가 정보</h2>
+    <form method="POST" action="/stock_info" class="stock-form">
+        <input type="text" name="company_name" placeholder="기업 이름을 입력하세요" required class="search-input">
+        <button type="submit" class="search-button">검색</button>
+    </form>
+
+    {% if company_name and stock_code %}
+        <h3>기업명: {{ company_name }}, 종목 코드: {{ stock_code }}</h3>
+
+        <!-- 주가 조회 기간 선택 버튼 -->
+        <form method="POST" action="/stock_info">
+            <input type="hidden" name="company_name" value="{{ company_name }}">
+            <button type="submit" name="period" value="1d" class="{% if selected_period == '1d' %}selected{% endif %}">1일</button>
+            <button type="submit" name="period" value="3m" class="{% if selected_period == '3m' %}selected{% endif %}">3개월</button>
+            <button type="submit" name="period" value="1y" class="{% if selected_period == '1y' %}selected{% endif %}">1년</button>
+            <button type="submit" name="period" value="3y" class="{% if selected_period == '3y' %}selected{% endif %}">3년</button>
+        </form>
+
+        <!-- 주가 그래프 표시 -->
+        <div class="stock-image-container">
+            {% if stock_images[selected_period] %}
+                <img src="{{ stock_images[selected_period] }}" alt="{{ company_name }} Stock Chart" class="stock-image">
+            {% endif %}
+        </div>
+
+        <!-- 최근 5일간의 주가 데이터 테이블 -->
+        <h3>최근 5일간의 주가 데이터:</h3>
+        <table class="stock-table">
+            <tr>
+                <th>날짜</th>
+                <th>시가</th>
+                <th>고가</th>
+                <th>저가</th>
+                <th>종가</th>
+                <th>거래량</th>
+            </tr>
+            {% for index, row in stock_data.iterrows() %}
+            <tr>
+                <td>{{ index }}</td>
+                <td>{{ row['Open'] }}</td>
+                <td>{{ row['High'] }}</td>
+                <td>{{ row['Low'] }}</td>
+                <td>{{ row['Close'] }}</td>
+                <td>{{ row['Volume'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% elif company_name %}
+        <p class="no-results">'{{ company_name }}'에 해당하는 기업을 찾을 수 없습니다.</p>
+    {% endif %}
+</section>
+{% endblock %}

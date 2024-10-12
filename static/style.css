@@ -1,0 +1,464 @@
+/* 공통 스타일 */
+body {
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    padding-bottom: 60px; /* 푸터와 겹치지 않도록 하단 여백 추가 */
+}
+
+/* Lemon 폰트 적용 */
+.lemon-regular {
+    font-family: "Lemon", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    color: #2e3842;
+}
+
+/* Header and Navigation Styles */
+#header {
+    background: #fff;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.menu {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-link {
+    color: #2e3842;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #fff; /* 배경을 흰색으로, 글자를 어둡게 */
+    transition: background-color 0.3s;
+    border: 1px solid #ddd;
+}
+
+.menu-link:hover {
+    background-color: #f0f0f0;
+}
+
+/* 인증 섹션 스타일 */
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.auth-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2e3842;
+    margin-bottom: 20px;
+}
+
+.auth-container {
+    background-color: #2e3842;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.auth-label {
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 5px;
+    text-align: left; /* 좌측 정렬 */
+}
+
+.auth-input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* 로그인 및 회원가입 버튼 스타일 */
+.auth-button {
+    padding: 10px 0;
+    border: 1px solid #ffffff; /* 흰색 테두리 추가 */
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    width: 80%;
+    margin-top: 10px;
+    color: #ffffff; /* 글씨 색상 흰색 */
+}
+
+.auth-button.primary {
+    background-color: #2e3842;
+    transition: background-color 0.3s;
+    position: relative; /* or absolute */
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.auth-button.primary:hover {
+    background-color: #495057;
+}
+
+.auth-button.secondary {
+    background-color: transparent;
+    border: 1px solid #ffffff; /* 흰색 테두리 */
+    text-decoration: none;
+    color: #ffffff; /* 글씨 색상 흰색 */
+}
+
+.auth-divider {
+    width: 80%;
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+}
+
+.auth-button.secondary:hover {
+    background-color: #2e3842;
+    color: #fff;
+}
+
+.btn-login, .btn-register, .btn-logout {
+    color: #fff;
+    background-color: #2e3842;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-login:hover, .btn-register:hover {
+    background-color: #495057;
+}
+
+/* 메인 콘텐츠 중앙 정렬 */
+.main-content {
+    text-align: center;
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 검색 페이지 스타일 */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.no-results {
+    font-size: 16px;
+    color: #999;
+    text-align: center;
+}
+.search-input {
+    padding: 10px;
+    width: calc(100% - 130px);
+    max-width: 500px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #2e3842;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #495057;
+}
+
+/* 기사 리스트 */
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-bottom: 40px;
+    list-style: none;
+    justify-content: center;
+}
+
+.article-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    position: relative;
+}
+
+.article-title {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    text-align: left; /* 제목 좌측 정렬 */
+}
+
+.article-summary {
+    font-size: 14px;
+    color: #555;
+    text-align: left; /* 요약 좌측 정렬 */
+    margin-bottom: 10px;
+}
+
+.article-sentiment {
+    font-size: 14px;
+    color: #555;
+    text-align: left; /* 정서 분석 내용 좌측 정렬 */
+}
+
+.positive {
+    color: #28a745; /* 긍정적 감정 - 초록색 */
+}
+
+.neutral {
+    color: #ffc107; /* 중립적 감정 - 노란색 */
+}
+
+.negative {
+    color: #ff5722; /* 부정적 감정 - 주황색 */
+}
+
+
+
+/* Sentiment Indicator */
+.sentiment-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.kospi-image {
+    width: 220px;
+    height: 174px;
+}
+
+/* Stock Table Styles */
+.stock-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+.stock-table th, .stock-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.stock-table th {
+    background-color: #f2f2f2;
+}
+
+
+/* 푸터 */
+#footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+/* 챗봇 스타일 */
+#chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.fab {
+    background-color: #ffff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fab img {
+    width: 45px;
+    height: 45px;
+}
+
+.chat-popup {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+#chat-content {
+    padding: 10px;
+    flex: 1;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.user-message {
+    text-align: right;
+    color: blue;
+}
+
+.bot-message {
+    text-align: left;
+    color: black;
+}
+
+#chat-input {
+    border: none;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    outline: none;
+    width: calc(100% - 70px);
+}
+
+#send-button {
+    border: none;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 0 10px 0;
+}
+
+#send-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* SIBO 보고서 생성 페이지 스타일 */
+.report-generation {
+    padding: 2rem 0;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.page-title {
+    text-align: center;
+    color: #2e3842;
+    margin-bottom: 2rem;
+}
+.report-form-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.report-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-group label {
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+.form-input {
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+.submit-button {
+    background-color: #2e3842;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.submit-button:hover {
+    background-color: #495057;
+}
+.report-info {
+    margin-top: 2rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+.report-info h2 {
+    color: #2e3842;
+    margin-bottom: 1rem;
+}
+.report-info ul {
+    padding-left: 1.5rem;
+}
+.report-info li {
+    margin-bottom: 0.5rem;
+}
